@@ -20,21 +20,8 @@ class TreeNode:
 
 
 class Solution:
-    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
-        avgs = []
-        curr = [root]
-        while curr:
-            new_level = []
-            curr_sum = 0
-            for r in curr:
-                if r.right:
-                    new_level.append(r.right)
-                if r.left:
-                    new_level.append(r.left)
-                curr_sum += r.val
-            avgs.append(curr_sum/len(curr))
-            curr = new_level
-        return avgs
+    def minDepth(self, root: Optional[TreeNode]) -> List[float]:
+
 
 
 node7 = TreeNode(val=7, left=None, right=None)
@@ -45,4 +32,4 @@ node3 = TreeNode(val=3, left=node9, right=node20)
 
 
 sol = Solution()
-print(sol.averageOfLevels(node3))
+print(sol.minDepth(node3))
