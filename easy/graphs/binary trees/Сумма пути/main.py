@@ -20,22 +20,19 @@ class TreeNode:
 
 
 class Solution:
-    def __init__(self):
-        self.min_depth = float("inf")
-
-    def minDepth(self, root: Optional[TreeNode]) -> List[float]:
-        if not root:
-            return 0
-
-        def dfs(node: TreeNode, num: int) -> None:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> List[float]:
+        def dfs(node: TreeNode, cur_sum: int):
             if not node:
-                return
+                return False
+            cur_sum += node.val
             if not node.left and not node.right:
-                self.min_depth = min(self.min_depth, num)
-            dfs(node.left, num+1)
-            dfs(node.right, num+1)
-        dfs(root, 1)
-        return self.min_depth
+                return cur_sum == targetSum
+            return (
+                dfs(node.left, cur_sum)
+                or
+                dfs(node.right, cur_sum)
+            )
+        return dfs(root, 0)
 
 
 node7 = TreeNode(val=7, left=None, right=None)
@@ -46,4 +43,4 @@ node3 = TreeNode(val=3, left=node9, right=node20)
 
 
 sol = Solution()
-print(sol.minDepth(node3))
+print(sol.hasPathSum(node3, 12))
